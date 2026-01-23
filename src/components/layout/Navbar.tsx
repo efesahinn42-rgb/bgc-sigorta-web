@@ -2,19 +2,24 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // <-- YENİ EKLENDİ: Sayfa kontrolü için
-import { Menu, X, ArrowRight, ShieldCheck } from "lucide-react";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { Menu, X, ArrowRight } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isHeroVisible, setIsHeroVisible] = useState(true);
   const pathname = usePathname(); // Şu an hangi sayfadayız?
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+      setIsHeroVisible(window.scrollY < window.innerHeight);
     };
     window.addEventListener("scroll", handleScroll);
+    // İlk yüklemede kontrol et
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -43,6 +48,25 @@ const Navbar = () => {
         scrolled ? "pt-2" : "pt-6"
       } px-4`}
     >
+      {/* LOGO - Sol tarafta, navbar ile aynı hizada */}
+      <Link
+        href="/"
+        className={`hidden md:block absolute left-12 md:left-24 z-50 group transition-all duration-300 ${
+          scrolled ? "-top-12" : "-top-8"
+        } ${!isHeroVisible ? "opacity-0 pointer-events-none" : "opacity-100"}`}
+      >
+        <div className="w-44 h-44 relative flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-2xl shadow-black/20">
+          <Image
+            src="/logo.png"
+            alt="BGC Sigorta Logo"
+            width={176}
+            height={176}
+            className="object-contain"
+            priority
+          />
+        </div>
+      </Link>
+
       <nav
         className={`
           w-full max-w-6xl rounded-full transition-all duration-300 border
@@ -53,37 +77,24 @@ const Navbar = () => {
           }
         `}
       >
-        <div className="flex justify-between items-center">
-          {/* LOGO */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 bg-gradient-to-tr from-red-600 to-red-700 text-white rounded-full flex items-center justify-center shadow-lg shadow-red-500/30 group-hover:scale-105 transition-transform duration-300">
-              <ShieldCheck size={20} className="text-white" />
+        <div className="flex items-center justify-between">
+          {/* MENÜ - Orta (Ortalanmış) */}
+          <div className="flex-1 flex justify-center items-center">
+            <div className="hidden md:flex items-center bg-gray-100/50 rounded-full px-2 py-1 border border-gray-200/50">
+              {navItems.map((item) => (
+                <Link
+                  key={item.name}
+                  href={getHref(item.hash)}
+                  className="px-5 py-2 text-sm font-medium text-slate-600 hover:text-red-600 hover:bg-white rounded-full transition-all duration-300"
+                >
+                  {item.name}
+                </Link>
+              ))}
             </div>
-            <div className="flex flex-col leading-none">
-              <span className="text-lg font-bold text-slate-900 tracking-tight">
-                BGC
-              </span>
-              <span className="text-xs font-semibold text-red-600 tracking-widest uppercase">
-                Sigorta
-              </span>
-            </div>
-          </Link>
-
-          {/* ORTA MENÜ (MASAÜSTÜ) */}
-          <div className="hidden md:flex items-center bg-gray-100/50 rounded-full px-2 py-1 border border-gray-200/50">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={getHref(item.hash)} // <-- Burada dinamik link yapısını kullandık
-                className="px-5 py-2 text-sm font-medium text-slate-600 hover:text-red-600 hover:bg-white rounded-full transition-all duration-300"
-              >
-                {item.name}
-              </Link>
-            ))}
           </div>
 
-          {/* SAĞ BUTON */}
-          <div className="hidden md:flex items-center">
+          {/* BUTONLAR - Sağ */}
+          <div className="flex-shrink-0 hidden md:flex items-center gap-3">
             <Link
               href="/teklif-al"
               className="group flex items-center gap-2 bg-slate-900 hover:bg-red-600 text-white pl-5 pr-4 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 shadow-xl hover:shadow-red-500/20 transform hover:-translate-y-0.5"
@@ -93,10 +104,19 @@ const Navbar = () => {
                 <ArrowRight size={14} className="text-white" />
               </div>
             </Link>
+            <Link
+              href="/bayi-girisi"
+              className="group flex items-center gap-2 bg-white hover:bg-red-50 text-slate-700 hover:text-red-600 border-2 border-slate-200 hover:border-red-600 pl-5 pr-4 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
+            >
+              Bayi Girişi
+              <div className="bg-slate-100 group-hover:bg-red-100 rounded-full p-1 transition">
+                <ArrowRight size={14} className="text-slate-600 group-hover:text-red-600" />
+              </div>
+            </Link>
           </div>
 
           {/* MOBİL BUTON */}
-          <div className="md:hidden flex items-center">
+          <div className="flex-shrink-0 md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-slate-800 p-2 hover:bg-gray-100 rounded-full transition"
@@ -119,7 +139,14 @@ const Navbar = () => {
                 {item.name}
               </Link>
             ))}
-            <div className="pt-2 border-t border-gray-100 mt-2">
+            <div className="pt-2 border-t border-gray-100 mt-2 space-y-2">
+              <Link
+                href="/bayi-girisi"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-white border-2 border-slate-200 text-slate-700 hover:bg-red-50 hover:border-red-600 hover:text-red-600 font-bold transition-all"
+              >
+                Bayi Girişi <ArrowRight size={18} />
+              </Link>
               <Link
                 href="/teklif-al"
                 onClick={() => setIsOpen(false)}

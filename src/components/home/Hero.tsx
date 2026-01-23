@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 
 const slides = [
@@ -86,8 +88,15 @@ const Hero = () => {
           key={current}
           className={`text-center lg:text-left max-w-4xl ${textAnimationClass}`}
         >
-          <span className="inline-block py-2 px-4 mb-6 rounded-full bg-red-600/20 text-red-400 text-sm font-bold tracking-wider uppercase border border-red-600/30 backdrop-blur-sm">
-            BGC Sigorta Güvencesiyle
+          <span className="inline-flex items-center gap-2 py-2 px-4 mb-6 rounded-full bg-red-600/20 text-red-400 text-sm font-bold tracking-wider uppercase border border-red-600/30 backdrop-blur-sm">
+            <Image
+              src="/logo.png"
+              alt="BGC Sigorta"
+              width={96}
+              height={96}
+              className="object-contain"
+            />
+            Güvencesiyle
           </span>
 
           <h1 className="text-4xl md:text-6xl lg:text-8xl font-extrabold text-white mb-8 leading-tight drop-shadow-2xl">

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { ShieldCheck, Users, Zap, Wallet } from "lucide-react";
 
 const Corporate = () => {
@@ -41,8 +42,16 @@ const Corporate = () => {
         <div className="flex flex-col lg:flex-row items-center gap-16">
           {/* SOL TARAF: METİN VE ÖZELLİKLER */}
           <div className="w-full lg:w-1/2">
-            <span className="inline-block py-1 px-3 rounded bg-red-50 text-red-600 font-bold tracking-wider uppercase text-xs mb-4">
-              NEDEN BGC SİGORTA?
+            <span className="inline-flex items-center gap-2 py-1 px-3 rounded bg-red-50 text-red-600 font-bold tracking-wider uppercase text-sm mb-4">
+              NEDEN
+              <Image
+                src="/logo.png"
+                alt="BGC Sigorta"
+                width={192}
+                height={192}
+                className="object-contain"
+              />
+              ?
             </span>
             <h2 className="text-4xl lg:text-5xl font-extrabold text-slate-900 mb-6 leading-tight">
               Geleceğinizi <br />
@@ -95,22 +104,26 @@ const Corporate = () => {
                     Yıllık Sektör Tecrübesi
                   </p>
                 </div>
-                <div className="h-64 rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
-                  <img
+                <div className="h-64 rounded-3xl overflow-hidden shadow-2xl border-4 border-white relative">
+                  <Image
                     src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1000&auto=format&fit=crop"
                     alt="Ofis Toplantı"
-                    className="w-full h-full object-cover hover:scale-110 transition duration-700"
+                    fill
+                    className="object-cover hover:scale-110 transition duration-700"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
               </div>
 
               {/* Görsel 2: Güven/Tokalaşma */}
               <div className="space-y-4">
-                <div className="h-64 rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
-                  <img
+                <div className="h-64 rounded-3xl overflow-hidden shadow-2xl border-4 border-white relative">
+                  <Image
                     src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1000&auto=format&fit=crop"
                     alt="Güven"
-                    className="w-full h-full object-cover hover:scale-110 transition duration-700"
+                    fill
+                    className="object-cover hover:scale-110 transition duration-700"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
                 <div className="bg-slate-900 text-white p-6 rounded-3xl shadow-xl text-center transform hover:-translate-y-2 transition duration-500">

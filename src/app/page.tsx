@@ -1,6 +1,8 @@
 import Hero from "@/components/home/Hero";
 import Corporate from "@/components/home/Corporate";
 import Partners from "@/components/home/Partners";
+import { generateStructuredData } from "@/lib/seo/structured-data";
+import Image from "next/image";
 import {
   Car,
   Home,
@@ -22,6 +24,45 @@ import {
 import Link from "next/link";
 
 export default function Page() {
+  const structuredData = generateStructuredData();
+  const advantages = [
+    {
+      icon: Truck,
+      title: "Ücretsiz Yol Yardım",
+      desc: "Çekici ve İkame Araç",
+      color: "text-green-400",
+    },
+    {
+      icon: CreditCard,
+      title: "Kredi Kartına Taksit",
+      desc: "Vade farksız ödeme",
+      color: "text-blue-400",
+    },
+    {
+      icon: Clock,
+      title: "Hızlı Onay Süreci",
+      desc: "24 saat içinde onay",
+      color: "text-yellow-400",
+    },
+    {
+      icon: Phone,
+      title: "7/24 Müşteri Desteği",
+      desc: "Kesintisiz destek hattı",
+      color: "text-purple-400",
+    },
+    {
+      icon: ShieldCheck,
+      title: "Online Poliçe Yönetimi",
+      desc: "Dijital poliçe erişimi",
+      color: "text-red-400",
+    },
+    {
+      icon: Star,
+      title: "Hasar Takibi",
+      desc: "Anlık hasar durumu",
+      color: "text-orange-400",
+    },
+  ];
   const services = [
     {
       icon: Car,
@@ -82,7 +123,16 @@ export default function Page() {
   ];
 
   return (
-    <main className="min-h-screen bg-white">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData.organization) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData.website) }}
+      />
+      <main className="min-h-screen bg-white">
       {/* 1. ANASAYFA (Hero) */}
       <section id="anasayfa">
         <Hero />
@@ -102,7 +152,16 @@ export default function Page() {
       <section id="hizmetler" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <span className="text-red-600 font-bold tracking-wider uppercase text-xs">
+            <div className="flex justify-center mb-4">
+              <Image
+                src="/logo.png"
+                alt="BGC Sigorta"
+                width={256}
+                height={256}
+                className="object-contain"
+              />
+            </div>
+            <span className="text-red-600 font-bold tracking-wider uppercase text-base">
               ÜRÜNLERİMİZ
             </span>
             <h2 className="text-3xl lg:text-4xl font-extrabold text-slate-900 mt-2">
@@ -155,7 +214,14 @@ export default function Page() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
             <div className="max-w-3xl">
-              <span className="inline-block py-1 px-3 rounded bg-red-900/50 border border-red-500/30 text-red-400 font-bold tracking-wider uppercase text-xs mb-6">
+              <span className="inline-flex items-center gap-2 py-1 px-3 rounded bg-red-900/50 border border-red-500/30 text-red-400 font-bold tracking-wider uppercase text-xs mb-6">
+                <Image
+                  src="/logo.png"
+                  alt="BGC Sigorta"
+                  width={256}
+                  height={256}
+                  className="object-contain"
+                />
                 SİGORTADA AKILLI DÖNEM
               </span>
               <h2 className="text-4xl lg:text-5xl font-extrabold text-white mb-6 leading-tight">
@@ -170,23 +236,19 @@ export default function Page() {
                 tarasın.
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-white">
-                <div className="flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/10 transition">
-                  <Truck size={20} className="text-green-400" />
-                  <div>
-                    <h4 className="font-bold text-sm">Ücretsiz Yol Yardım</h4>
-                    <p className="text-xs text-slate-400">
-                      Çekici ve İkame Araç
-                    </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-white">
+                {advantages.map((advantage, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/10 transition"
+                  >
+                    <advantage.icon size={20} className={advantage.color} />
+                    <div>
+                      <h4 className="font-bold text-sm">{advantage.title}</h4>
+                      <p className="text-xs text-slate-400">{advantage.desc}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/10 transition">
-                  <CreditCard size={20} className="text-blue-400" />
-                  <div>
-                    <h4 className="font-bold text-sm">Kredi Kartına Taksit</h4>
-                    <p className="text-xs text-slate-400">Vade farksız ödeme</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 
@@ -210,6 +272,15 @@ export default function Page() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
+            <div className="flex justify-center mb-4">
+              <Image
+                src="/logo.png"
+                alt="BGC Sigorta"
+                width={256}
+                height={256}
+                className="object-contain"
+              />
+            </div>
             <span className="text-red-600 font-bold tracking-wider uppercase text-xs">
               BİZE ULAŞIN
             </span>
@@ -371,25 +442,36 @@ export default function Page() {
 
           <div className="mt-20 flex flex-col md:flex-row justify-between items-center border-t border-slate-100 pt-10 text-slate-400 text-xs gap-6">
             <div className="flex items-center gap-4">
-              <div className="w-8 h-8 bg-slate-900 text-white rounded flex items-center justify-center font-bold">
-                B
-              </div>
+              <Image
+                src="/logo.png"
+                alt="BGC Sigorta"
+                width={256}
+                height={256}
+                className="object-contain"
+              />
               <p>© 2026 BGC Sigorta Hizmetleri A.Ş. | Karatay / Konya</p>
             </div>
             <div className="flex gap-8 font-bold uppercase tracking-widest">
-              <span className="hover:text-red-600 cursor-pointer transition">
+              <Link
+                href="/gizlilik-politikasi"
+                className="hover:text-red-600 transition"
+              >
                 Gizlilik Politikası
-              </span>
-              <span className="hover:text-red-600 cursor-pointer transition">
+              </Link>
+              <Link href="/kvkk" className="hover:text-red-600 transition">
                 KVKK Metni
-              </span>
-              <span className="hover:text-red-600 cursor-pointer transition">
+              </Link>
+              <Link
+                href="/kullanim-kosullari"
+                className="hover:text-red-600 transition"
+              >
                 Kullanım Koşulları
-              </span>
+              </Link>
             </div>
           </div>
         </div>
       </section>
     </main>
+    </>
   );
 }

@@ -56,6 +56,40 @@ export default function TeklifAlPage() {
     (p) => p.id === selectedProduct
   )?.category;
 
+  // Özellik Kartları
+  const features = [
+    {
+      icon: ShieldCheck,
+      title: "Kişisel Veri Koruması",
+      desc: "Bilgileriniz %100 güvende",
+    },
+    {
+      icon: Clock,
+      title: "Anında Karşılaştırma",
+      desc: "20+ Sigorta şirketi",
+    },
+    {
+      icon: CheckCircle,
+      title: "Hızlı Onay",
+      desc: "24 saat içinde onay",
+    },
+    {
+      icon: Star,
+      title: "7/24 Destek",
+      desc: "Kesintisiz müşteri hizmeti",
+    },
+    {
+      icon: FileCheck,
+      title: "Online İşlemler",
+      desc: "Dijital poliçe yönetimi",
+    },
+    {
+      icon: Truck,
+      title: "En İyi Fiyat",
+      desc: "En uygun teklif garantisi",
+    },
+  ];
+
   const handleNext = () => {
     if (step === 1 && !selectedProduct) return;
     setStep((prev) => prev + 1);
@@ -70,13 +104,7 @@ export default function TeklifAlPage() {
       {/* SOL PANEL (SABİT) */}
       <div className="hidden lg:flex w-1/3 bg-slate-900 text-white flex-col justify-between p-12 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-red-600/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-        <div>
-          <Link href="/" className="flex items-center gap-2 mb-12">
-            <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center font-bold text-xl">
-              B
-            </div>
-            <span className="text-2xl font-bold">BGC Sigorta</span>
-          </Link>
+        <div className="flex-1 flex flex-col justify-center">
           <h2 className="text-4xl font-bold leading-tight mb-6">
             Akıllı Teklif <br /> <span className="text-red-500">Sihirbazı</span>
           </h2>
@@ -86,26 +114,17 @@ export default function TeklifAlPage() {
           </p>
         </div>
         <div className="space-y-6">
-          <div className="flex items-center gap-4">
-            <div className="bg-white/10 p-3 rounded-full">
-              <ShieldCheck className="text-red-500" />
+          {features.map((feature, index) => (
+            <div key={index} className="flex items-center gap-4">
+              <div className="bg-white/10 p-3 rounded-full">
+                <feature.icon className="text-red-500" />
+              </div>
+              <div>
+                <h4 className="font-bold">{feature.title}</h4>
+                <p className="text-sm text-slate-400">{feature.desc}</p>
+              </div>
             </div>
-            <div>
-              <h4 className="font-bold">Kişisel Veri Koruması</h4>
-              <p className="text-sm text-slate-400">
-                Bilgileriniz %100 güvende
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="bg-white/10 p-3 rounded-full">
-              <Clock className="text-red-500" />
-            </div>
-            <div>
-              <h4 className="font-bold">Anında Karşılaştırma</h4>
-              <p className="text-sm text-slate-400">20+ Sigorta şirketi</p>
-            </div>
-          </div>
+          ))}
         </div>
         <p className="text-xs text-slate-600">© 2024 BGC Sigorta A.Ş.</p>
       </div>
