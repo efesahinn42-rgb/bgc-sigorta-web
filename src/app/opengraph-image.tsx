@@ -43,8 +43,9 @@ export default function OpenGraphImage() {
         >
           <div
             style={{
-              display: "inline-flex",
+              display: "flex",
               alignItems: "center",
+              alignSelf: "flex-start",
               borderRadius: "999px",
               background: "rgba(255,255,255,0.08)",
               border: "1px solid rgba(255,255,255,0.16)",
