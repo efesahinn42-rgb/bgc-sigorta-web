@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import TeklifAlPage from "@/app/teklif-al/page";
+import TeklifAlPage from "@/app/teklif-al/TeklifAlPageClient";
 import { ToastProvider } from "@/components/ui/Toaster";
 
 const fetchMock = vi.fn();
