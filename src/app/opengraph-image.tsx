@@ -56,11 +56,20 @@ export default function OpenGraphImage() {
           >
             {siteConfig.name}
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "20px", maxWidth: "780px" }}>
-            <div style={{ fontSize: "72px", fontWeight: 800, lineHeight: 1.05 }}>
-              Hayatin Her Aninda
-              <br />
-              Guvendesiniz
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "20px", maxWidth: "780px" }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                fontSize: "72px",
+                fontWeight: 800,
+                lineHeight: 1.05,
+              }}
+            >
+              <span>Hayatin Her Aninda</span>
+              <span>Guvendesiniz</span>
             </div>
             <div
               style={{
