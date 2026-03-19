@@ -1,38 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import { quoteFormSchema, type QuoteFormData } from "@/lib/validations/quote-form";
-
-// Rate limiting için basit bir in-memory store (production'da Redis kullanılmalı)
-const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
-
-function rateLimit(ip: string): boolean {
-  const now = Date.now();
-  const limit = rateLimitMap.get(ip);
-
-  if (!limit || now > limit.resetTime) {
-    rateLimitMap.set(ip, { count: 1, resetTime: now + 60 * 1000 }); // 1 dakika
-    return true;
-  }
-
-  if (limit.count >= 5) {
-    // 1 dakikada 5 istekten fazla
-    return false;
-  }
-
-  limit.count++;
-  return true;
-}
-
-function getClientIP(request: NextRequest): string {
-  const forwarded = request.headers.get("x-forwarded-for");
-  const realIP = request.headers.get("x-real-ip");
-  return forwarded?.split(",")[0] || realIP || "unknown";
-}
+import { createLeadAndNotify } from "@/lib/server/lead-service";
+import { getClientIp, quoteRateLimiter } from "@/lib/server/rate-limit";
+import { quoteSubmissionSchema } from "@/lib/validations/quote-form";
 
 export async function POST(request: NextRequest) {
   try {
-    // Rate limiting
-    const clientIP = getClientIP(request);
-    if (!rateLimit(clientIP)) {
+    const clientIp = getClientIp(request.headers);
+
+    if (!quoteRateLimiter.check(clientIp)) {
       return NextResponse.json(
         { error: "Çok fazla istek. Lütfen bir dakika sonra tekrar deneyin." },
         { status: 429 }
@@ -42,7 +17,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
 
     // Form verilerini doğrula
-    const validationResult = quoteFormSchema.safeParse(body);
+    const validationResult = quoteSubmissionSchema.safeParse(body);
 
     if (!validationResult.success) {
       return NextResponse.json(
@@ -54,33 +29,25 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const formData = validationResult.data;
-
-    // Burada form verilerini işleyebilirsiniz:
-    // - Veritabanına kaydetme
-    // - Email gönderme
-    // - Harici API'lere gönderme
-    // - CRM sistemine entegrasyon
-
-    // Örnek: Form verilerini loglama (production'da kaldırılmalı)
-    console.log("Form gönderildi:", {
-      product: formData.selectedProduct,
-      timestamp: new Date().toISOString(),
-      ip: clientIP,
+    const submission = validationResult.data;
+    const result = await createLeadAndNotify(submission, {
+      clientIp,
+      userAgent: request.headers.get("user-agent"),
     });
 
-    // Email gönderimi (opsiyonel - SMTP yapılandırması gerekli)
-    // if (env.SMTP_HOST) {
-    //   await sendEmail(formData);
-    // }
-
-    // Veritabanı kaydı (opsiyonel - Prisma veya başka ORM gerekli)
-    // await db.quote.create({ data: formData });
+    if (result.notificationStatus === "failed") {
+      console.error("Lead notification failed:", {
+        leadId: result.leadId,
+        error: result.notificationError,
+      });
+    }
 
     return NextResponse.json(
       {
         success: true,
         message: "Teklif talebiniz başarıyla alındı. En kısa sürede sizinle iletişime geçeceğiz.",
+        leadId: result.leadId,
+        notificationStatus: result.notificationStatus,
       },
       { status: 200 }
     );

@@ -1,7 +1,7 @@
-import { cn } from "@/lib/utils"; // Bunu birazdan oluşturacağız
-import React from "react";
+import type { ButtonHTMLAttributes } from "react";
+import { cn } from "@/lib/utils";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "outline" | "ghost";
 }
 
@@ -21,11 +21,9 @@ export const Button = ({
     ghost: "text-slate-600 hover:text-red-600 bg-transparent hover:bg-red-50",
   };
 
-  // className birleştirme işlemi için basit bir mantık (clsx olmadan manuel çözüm şimdilik)
-  // Not: Eğer lib/utils hatası alırsan aşağıda düzelteceğiz.
   return (
     <button
-      className={`${baseStyles} ${variants[variant]} ${className || ""}`}
+      className={cn(baseStyles, variants[variant], className)}
       {...props}
     />
   );

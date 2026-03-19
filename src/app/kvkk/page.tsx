@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "KVKK Aydınlatma Metni | BGC Sigorta",
@@ -13,7 +14,7 @@ export default function KVKKPage() {
           <h1 className="text-4xl font-extrabold text-slate-900 mb-4">
             KVKK Aydınlatma Metni
           </h1>
-          <p className="text-slate-600">Son Güncelleme: 23 Ocak 2026</p>
+          <p className="text-slate-600">Son Güncelleme: 19 Mart 2026</p>
         </div>
 
         <div className="prose prose-slate max-w-none space-y-8">
@@ -22,21 +23,21 @@ export default function KVKKPage() {
               1. Veri Sorumlusu
             </h2>
             <p className="text-slate-700 leading-relaxed">
-              <strong>BGC Sigorta Hizmetleri A.Ş.</strong> ("BGC Sigorta" veya "Şirket") olarak,
+              <strong>{siteConfig.legalName}</strong> ("BGC Sigorta" veya "Şirket") olarak,
               6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") kapsamında veri sorumlusu
               sıfatıyla, kişisel verilerinizin işlenmesi ile ilgili aşağıdaki bilgilendirmeyi
               yapmaktayız.
             </p>
             <div className="bg-slate-50 p-4 rounded-lg mt-4">
               <p className="text-sm text-slate-700">
-                <strong>Adres:</strong> Akabe, Şht. Furkan Doğan Cd. Bey Plaza Kat:1 No:3/122,
-                Karatay / Konya
+                <strong>Adres:</strong> {siteConfig.contact.addressLine1}{" "}
+                {siteConfig.contact.addressLine2}, {siteConfig.contact.city}
               </p>
               <p className="text-sm text-slate-700 mt-2">
-                <strong>Telefon:</strong> 0530 232 27 42
+                <strong>Telefon:</strong> {siteConfig.contact.phoneDisplay}
               </p>
               <p className="text-sm text-slate-700 mt-2">
-                <strong>E-posta:</strong> info@bgcsigorta.com
+                <strong>E-posta:</strong> {siteConfig.contact.email}
               </p>
             </div>
           </section>
@@ -61,7 +62,8 @@ export default function KVKKPage() {
                 sağlık bilgileri
               </li>
               <li>
-                <strong>İşlem Güvenliği Verileri:</strong> IP adresi, çerez bilgileri, log kayıtları
+                <strong>İşlem Güvenliği Verileri:</strong> IP adresi, kullanıcı aracısı bilgisi,
+                çerez tercihleri ve log kayıtları
               </li>
             </ul>
           </section>
@@ -75,9 +77,8 @@ export default function KVKKPage() {
             </p>
             <ul className="list-disc pl-6 space-y-2 text-slate-700">
               <li>Sigorta teklifi hazırlama ve sunma</li>
-              <li>Sigorta poliçesi oluşturma ve yönetme</li>
+              <li>Teklif talebinin operasyon ekibine iletilmesi</li>
               <li>Müşteri ilişkileri yönetimi</li>
-              <li>Hasar işlemlerinin yürütülmesi</li>
               <li>Yasal yükümlülüklerin yerine getirilmesi</li>
               <li>İletişim ve bilgilendirme faaliyetleri</li>
               <li>Hizmet kalitesinin artırılması</li>
@@ -111,11 +112,9 @@ export default function KVKKPage() {
               aktarılabilir:
             </p>
             <ul className="list-disc pl-6 space-y-2 text-slate-700">
-              <li>Sigorta şirketleri (AXA, Anadolu Sigorta, Allianz, vb.)</li>
-              <li>Yasal danışmanlar ve avukatlar</li>
-              <li>Denetim firmaları</li>
+              <li>Operasyon ekibimize bildirim sağlayan e-posta servis altyapısı</li>
+              <li>Barındırma ve veritabanı altyapısı sağlayan teknoloji hizmet sağlayıcıları</li>
               <li>Kamu kurum ve kuruluşları (yasal zorunluluk halinde)</li>
-              <li>Teknoloji hizmet sağlayıcıları</li>
             </ul>
           </section>
 
@@ -124,9 +123,10 @@ export default function KVKKPage() {
               6. Kişisel Verilerin Saklama Süresi
             </h2>
             <p className="text-slate-700 leading-relaxed">
-              Kişisel verileriniz, işlendikleri amaçla bağlantılı olarak, ilgili mevzuatta öngörülen
-              süreler ve işleme amacının gerektirdiği süre boyunca saklanmaktadır. Bu süre sona
-              erdiğinde, kişisel verileriniz silinir, yok edilir veya anonim hale getirilir.
+              Teklif talepleri, teklif sürecinin yürütülmesi ve yasal yükümlülüklerin yerine
+              getirilmesi amacıyla PostgreSQL tabanlı sistemlerimizde saklanabilir. Saklama süresi,
+              işleme amacı ve yasal yükümlülükler doğrultusunda belirlenir; süre sonunda veriler
+              silinir, yok edilir veya anonim hale getirilir.
             </p>
           </section>
 
@@ -166,15 +166,15 @@ export default function KVKKPage() {
             </p>
             <ul className="list-disc pl-6 space-y-2 text-slate-700">
               <li>
-                <strong>E-posta:</strong> info@bgcsigorta.com adresine "KVKK Başvurusu" konu başlığı
+                <strong>E-posta:</strong> {siteConfig.contact.email} adresine "KVKK Başvurusu" konu başlığı
                 ile
               </li>
               <li>
-                <strong>Posta:</strong> Akabe, Şht. Furkan Doğan Cd. Bey Plaza Kat:1 No:3/122,
-                Karatay / Konya adresine yazılı olarak
+                <strong>Posta:</strong> {siteConfig.contact.addressLine1} {siteConfig.contact.addressLine2},{" "}
+                {siteConfig.contact.city} adresine yazılı olarak
               </li>
               <li>
-                <strong>Telefon:</strong> 0530 232 27 42 numaralı telefonu arayarak
+                <strong>Telefon:</strong> {siteConfig.contact.phoneDisplay} numaralı telefonu arayarak
               </li>
             </ul>
             <p className="text-slate-700 leading-relaxed mt-4">

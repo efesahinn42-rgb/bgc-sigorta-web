@@ -1,21 +1,16 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  content: [
-    "./src/app/**/*.{js,ts,jsx,tsx}",
-    "./src/components/**/*.{js,ts,jsx,tsx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       colors: {
-        // Senin belirlediğin Moodboard renkleri:
         brand: {
-          red: "#D9232E", // BGC Kırmızısı (Canlı, dikkat çekici)
-          blue: "#0F172A", // Güven Mavisi (Laciverte yakın, oturaklı)
-          green: "#10B981", // Onay Yeşili
-          ice: "#F8FAFC", // Zemin (Buz mavisi/Kırık beyaz - Göz yormayan)
-          gray: "#64748B", // İkincil metinler için soft gri
+          red: "#D9232E",
+          blue: "#0F172A",
+          green: "#10B981",
+          ice: "#F8FAFC",
+          gray: "#64748B",
         },
       },
       fontFamily: {
@@ -30,4 +25,5 @@ const config: Config = {
   },
   plugins: [],
 };
+
 export default config;

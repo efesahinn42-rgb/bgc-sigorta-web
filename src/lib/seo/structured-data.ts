@@ -1,19 +1,18 @@
-export function generateStructuredData() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+import { siteConfig } from "@/lib/site-config";
 
+export function generateStructuredData() {
   const organization = {
     "@context": "https://schema.org",
     "@type": "InsuranceAgency",
-    name: "BGC Sigorta Hizmetleri A.Ş.",
-    alternateName: "BGC Sigorta",
-    url: baseUrl,
-    logo: `${baseUrl}/logo.png`,
-    image: `${baseUrl}/og-image.jpg`,
-    description:
-      "Konya merkezli sigorta danışmanlık hizmetleri. Kasko, trafik, sağlık ve konut sigortası teklifleri.",
+    name: siteConfig.legalName,
+    alternateName: siteConfig.name,
+    url: siteConfig.siteUrl,
+    logo: `${siteConfig.siteUrl}/logo.png`,
+    image: `${siteConfig.siteUrl}/opengraph-image`,
+    description: siteConfig.description,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Akabe, Şht. Furkan Doğan Cd. Bey Plaza Kat:1 No:3/122",
+      streetAddress: `${siteConfig.contact.addressLine1} ${siteConfig.contact.addressLine2}`,
       addressLocality: "Karatay",
       addressRegion: "Konya",
       addressCountry: "TR",
@@ -22,88 +21,21 @@ export function generateStructuredData() {
       "@type": "ContactPoint",
       telephone: "+90-530-232-27-42",
       contactType: "customer service",
-      email: "info@bgcsigorta.com",
+      email: siteConfig.contact.email,
       areaServed: "TR",
       availableLanguage: "Turkish",
     },
-    sameAs: [
-      // Sosyal medya linkleri eklenecek
-    ],
   };
 
   const website = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "BGC Sigorta",
-    url: baseUrl,
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${baseUrl}/arama?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
+    name: siteConfig.name,
+    url: siteConfig.siteUrl,
   };
-
-  const services = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      serviceType: "Kasko Sigortası",
-      provider: {
-        "@type": "InsuranceAgency",
-        name: "BGC Sigorta",
-      },
-      areaServed: {
-        "@type": "Country",
-        name: "Turkey",
-      },
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      serviceType: "Trafik Sigortası",
-      provider: {
-        "@type": "InsuranceAgency",
-        name: "BGC Sigorta",
-      },
-      areaServed: {
-        "@type": "Country",
-        name: "Turkey",
-      },
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      serviceType: "Sağlık Sigortası",
-      provider: {
-        "@type": "InsuranceAgency",
-        name: "BGC Sigorta",
-      },
-      areaServed: {
-        "@type": "Country",
-        name: "Turkey",
-      },
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      serviceType: "Konut Sigortası",
-      provider: {
-        "@type": "InsuranceAgency",
-        name: "BGC Sigorta",
-      },
-      areaServed: {
-        "@type": "Country",
-        name: "Turkey",
-      },
-    },
-  ];
 
   return {
     organization,
     website,
-    services,
   };
 }

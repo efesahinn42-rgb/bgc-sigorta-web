@@ -1,10 +1,7 @@
-"use client";
-
 import Image from "next/image";
 import { ShieldCheck, Users, Zap, Wallet } from "lucide-react";
 
 const Corporate = () => {
-  // Özellikleri burada tanımlıyoruz, ekleme yapmak istersen buraya yazman yeterli.
   const features = [
     {
       icon: ShieldCheck,
@@ -65,7 +62,6 @@ const Corporate = () => {
               basitleştirmek ve en doğru teminatı sunmaktır.
             </p>
 
-            {/* İKONLU ÖZELLİKLER GRİDİ (2x2) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {features.map((item, index) => (
                 <div
@@ -92,11 +88,9 @@ const Corporate = () => {
 
           {/* SAĞ TARAF: GÖRSEL KOMPOZİSYONU */}
           <div className="w-full lg:w-1/2 relative mt-10 lg:mt-0">
-            {/* Dekoratif Arka Plan */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-gray-100 to-gray-50 rounded-full blur-3xl -z-10"></div>
 
             <div className="relative grid grid-cols-2 gap-4">
-              {/* Görsel 1: Ofis Ortamı */}
               <div className="space-y-4 mt-8">
                 <div className="bg-white p-6 rounded-3xl shadow-xl border border-gray-100 text-center transform hover:-translate-y-2 transition duration-500">
                   <h3 className="text-4xl font-extrabold text-red-600">20+</h3>
@@ -115,7 +109,6 @@ const Corporate = () => {
                 </div>
               </div>
 
-              {/* Görsel 2: Güven/Tokalaşma */}
               <div className="space-y-4">
                 <div className="h-64 rounded-3xl overflow-hidden shadow-2xl border-4 border-white relative">
                   <Image

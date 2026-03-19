@@ -10,37 +10,41 @@ const slides = [
     id: 1,
     title: "Aracınız BGC Güvencesinde",
     desc: "Yola çıkarken aklınız aracınızda kalmasın. En kapsamlı kasko ve trafik sigortası çözümleri.",
-    // Kasko: Lüks Araç
     imageSrc:
       "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1966&auto=format&fit=crop",
     buttonText: "Kasko Fiyatı Al",
+    primaryHref: "/teklif-al?product=kasko",
+    secondaryHref: "/#hizmetler",
   },
   {
     id: 2,
     title: "Sağlığınız Bize Emanet",
     desc: "Siz ve sevdikleriniz için en iyi hastanelerde geçerli tamamlayıcı ve özel sağlık sigortaları.",
-    // Sağlık: Doktor ve Hasta Güveni
     imageSrc:
       "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?q=80&w=2070&auto=format&fit=crop",
     buttonText: "Sağlık Teklifi Al",
+    primaryHref: "/teklif-al?product=saglik",
+    secondaryHref: "/#hizmetler",
   },
   {
     id: 3,
     title: "Yuvanızın Gerçek Güvencesi",
     desc: "Evinizi ve içindeki değerli anıları yangın, deprem ve hırsızlığa karşı koruma altına alın.",
-    // Konut: Modern Ev
     imageSrc:
       "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070&auto=format&fit=crop",
     buttonText: "Konut Paketi İncele",
+    primaryHref: "/teklif-al?product=konut",
+    secondaryHref: "/#kurumsal",
   },
   {
     id: 4,
     title: "İşyeriniz İçin Tam Koruma",
     desc: "Ticari geleceğinizi riske atmayın. İşyerinizi ve emeğinizi tüm risklere karşı sigortalayın.",
-    // İşyeri: Plaza / Ofis
     imageSrc:
       "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop",
     buttonText: "İşyeri Teklifi Al",
+    primaryHref: "/teklif-al?product=isyeri",
+    secondaryHref: "/#referanslar",
   },
 ];
 
@@ -55,11 +59,7 @@ const Hero = () => {
     setCurrent(current === slides.length - 1 ? 0 : current + 1);
   };
 
-  // Yazı Animasyonu
-  const textAnimationClass = "animate-[fadeInUp_0.7s_ease-out]";
-
   return (
-    // DEĞİŞİKLİK BURADA: h-[600px] yerine h-screen (Tam Ekran) yaptık.
     <div className="relative w-full h-screen min-h-[700px] overflow-hidden bg-gray-900">
       {/* SLIDER GÖRSELLERİ */}
       {slides.map((slide, index) => (
@@ -82,11 +82,9 @@ const Hero = () => {
 
       {/* İÇERİK METİNLERİ */}
       <div className="relative z-20 w-full h-full flex items-center justify-center lg:justify-start px-4 sm:px-6 lg:px-16 pt-20">
-        {" "}
-        {/* pt-20 ekledim ki yazılar biraz aşağı insin, menüyle çakışmasın */}
         <div
           key={current}
-          className={`text-center lg:text-left max-w-4xl ${textAnimationClass}`}
+          className="text-center lg:text-left max-w-4xl animate-fade-up"
         >
           <span className="inline-flex items-center gap-2 py-2 px-4 mb-6 rounded-full bg-red-600/20 text-red-400 text-sm font-bold tracking-wider uppercase border border-red-600/30 backdrop-blur-sm">
             <Image
@@ -107,13 +105,19 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <button className="group bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-xl hover:shadow-red-600/40 hover:-translate-y-1 flex items-center justify-center">
+            <Link
+              href={slides[current].primaryHref}
+              className="group bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-xl hover:shadow-red-600/40 hover:-translate-y-1 flex items-center justify-center"
+            >
               {slides[current].buttonText}
               <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-xl font-bold text-lg transition-all backdrop-blur-sm">
+            </Link>
+            <Link
+              href={slides[current].secondaryHref}
+              className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-xl font-bold text-lg transition-all backdrop-blur-sm"
+            >
               Detaylı Bilgi
-            </button>
+            </Link>
           </div>
         </div>
       </div>

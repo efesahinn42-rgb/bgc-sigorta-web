@@ -1,7 +1,21 @@
+"use client";
+
+import { useEffect } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 import Script from "next/script";
-import { GA_TRACKING_ID } from "@/lib/analytics/gtag";
+import { GA_TRACKING_ID, pageview } from "@/lib/analytics/gtag";
 
 export function GoogleAnalytics() {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const query = searchParams?.toString() || "";
+
+  useEffect(() => {
+    const url = query ? `${pathname}?${query}` : pathname;
+
+    pageview(url);
+  }, [pathname, query]);
+
   if (!GA_TRACKING_ID) return null;
 
   return (

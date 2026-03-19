@@ -104,15 +104,6 @@ const Navbar = () => {
                 <ArrowRight size={14} className="text-white" />
               </div>
             </Link>
-            <Link
-              href="/bayi-girisi"
-              className="group flex items-center gap-2 bg-white hover:bg-red-50 text-slate-700 hover:text-red-600 border-2 border-slate-200 hover:border-red-600 pl-5 pr-4 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
-            >
-              Bayi Girişi
-              <div className="bg-slate-100 group-hover:bg-red-100 rounded-full p-1 transition">
-                <ArrowRight size={14} className="text-slate-600 group-hover:text-red-600" />
-              </div>
-            </Link>
           </div>
 
           {/* MOBİL BUTON */}
@@ -128,7 +119,7 @@ const Navbar = () => {
 
         {/* MOBİL MENÜ (AÇILIR KISIM) */}
         {isOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 mt-3 p-4 bg-white rounded-3xl shadow-2xl border border-gray-100 flex flex-col space-y-2 animate-in slide-in-from-top-4 fade-in-0 duration-200">
+          <div className="md:hidden absolute top-full left-0 right-0 mt-3 p-4 bg-white rounded-3xl shadow-2xl border border-gray-100 flex flex-col space-y-2 animate-drop-in">
             {navItems.map((item) => (
               <Link
                 key={item.name}
@@ -140,13 +131,6 @@ const Navbar = () => {
               </Link>
             ))}
             <div className="pt-2 border-t border-gray-100 mt-2 space-y-2">
-              <Link
-                href="/bayi-girisi"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-white border-2 border-slate-200 text-slate-700 hover:bg-red-50 hover:border-red-600 hover:text-red-600 font-bold transition-all"
-              >
-                Bayi Girişi <ArrowRight size={18} />
-              </Link>
               <Link
                 href="/teklif-al"
                 onClick={() => setIsOpen(false)}

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Kullanım Koşulları | BGC Sigorta",
@@ -13,7 +14,7 @@ export default function KullanimKosullariPage() {
           <h1 className="text-4xl font-extrabold text-slate-900 mb-4">
             Kullanım Koşulları
           </h1>
-          <p className="text-slate-600">Son Güncelleme: 23 Ocak 2026</p>
+          <p className="text-slate-600">Son Güncelleme: 19 Mart 2026</p>
         </div>
 
         <div className="prose prose-slate max-w-none space-y-8">
@@ -22,7 +23,7 @@ export default function KullanimKosullariPage() {
               1. Genel Hükümler
             </h2>
             <p className="text-slate-700 leading-relaxed">
-              Bu Kullanım Koşulları, BGC Sigorta Hizmetleri A.Ş. ("BGC Sigorta", "Şirket", "Biz")
+              Bu Kullanım Koşulları, {siteConfig.legalName} ("BGC Sigorta", "Şirket", "Biz")
               tarafından işletilen web sitesinin ("Site") kullanımını düzenlemektedir. Siteyi
               kullanarak, bu koşulları kabul etmiş sayılırsınız. Koşulları kabul etmiyorsanız,
               lütfen siteyi kullanmayın.
@@ -116,7 +117,19 @@ export default function KullanimKosullariPage() {
 
           <section>
             <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">
-              8. Değişiklikler
+              8. Teklif Formu ve Bildirim Süreci
+            </h2>
+            <p className="text-slate-700 leading-relaxed">
+              Teklif formu üzerinden paylaştığınız bilgiler, teklif hazırlama amacıyla sistemlerimize
+              kaydedilir ve operasyon ekibimize e-posta bildirimi olarak iletilebilir. Form
+              gönderimi, poliçe kurulmuş olduğu anlamına gelmez; kesin teklif ve değerlendirme
+              uzman ekiplerimiz tarafından ayrıca yapılır.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">
+              9. Değişiklikler
             </h2>
             <p className="text-slate-700 leading-relaxed">
               BGC Sigorta, bu Kullanım Koşullarını herhangi bir zamanda değiştirme hakkını
@@ -127,7 +140,7 @@ export default function KullanimKosullariPage() {
 
           <section>
             <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">
-              9. Uygulanacak Hukuk ve Yetkili Mahkeme
+              10. Uygulanacak Hukuk ve Yetkili Mahkeme
             </h2>
             <p className="text-slate-700 leading-relaxed">
               Bu Kullanım Koşulları Türkiye Cumhuriyeti kanunlarına tabidir. Bu koşullardan
@@ -137,21 +150,21 @@ export default function KullanimKosullariPage() {
 
           <section>
             <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">
-              10. İletişim
+              11. İletişim
             </h2>
             <p className="text-slate-700 leading-relaxed">
               Kullanım Koşulları hakkında sorularınız için bizimle iletişime geçebilirsiniz:
             </p>
             <div className="bg-slate-50 p-4 rounded-lg mt-4">
               <p className="text-sm text-slate-700">
-                <strong>E-posta:</strong> info@bgcsigorta.com
+                <strong>E-posta:</strong> {siteConfig.contact.email}
               </p>
               <p className="text-sm text-slate-700 mt-2">
-                <strong>Telefon:</strong> 0530 232 27 42
+                <strong>Telefon:</strong> {siteConfig.contact.phoneDisplay}
               </p>
               <p className="text-sm text-slate-700 mt-2">
-                <strong>Adres:</strong> Akabe, Şht. Furkan Doğan Cd. Bey Plaza Kat:1 No:3/122,
-                Karatay / Konya
+                <strong>Adres:</strong> {siteConfig.contact.addressLine1}{" "}
+                {siteConfig.contact.addressLine2}, {siteConfig.contact.city}
               </p>
             </div>
           </section>

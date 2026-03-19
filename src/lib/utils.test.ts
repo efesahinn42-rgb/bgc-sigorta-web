@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { describe, expect, it } from "vitest";
 
 describe("cn utility function", () => {
   it("merges class names correctly", () => {

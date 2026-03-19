@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
 import { Button } from "@/components/ui/Button";
 
 describe("Button Component", () => {
@@ -26,7 +27,7 @@ describe("Button Component", () => {
   });
 
   it("handles click events", () => {
-    const handleClick = jest.fn();
+    const handleClick = vi.fn();
     render(<Button onClick={handleClick}>Click Me</Button>);
     const button = screen.getByText("Click Me");
     button.click();

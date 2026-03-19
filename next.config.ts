@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
+  serverExternalPackages: ["nodemailer"],
   images: {
     remotePatterns: [
       {
@@ -11,32 +12,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "logo.clearbit.com",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "img.logo.dev",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "cdn.brandfetch.io",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
         hostname: "static.cdnlogo.com",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "cdn.jsdelivr.net",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "raw.githubusercontent.com",
         pathname: "/**",
       },
     ],

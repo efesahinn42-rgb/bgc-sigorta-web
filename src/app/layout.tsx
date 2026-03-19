@@ -5,17 +5,16 @@ import Navbar from "@/components/layout/Navbar";
 import { CookieConsent } from "@/components/layout/CookieConsent";
 import { ToastProvider } from "@/components/ui/Toaster";
 import { ErrorBoundary } from "@/components/errors/ErrorBoundary";
-import { Analytics } from "@vercel/analytics/react";
-import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
+import { ConsentProvider } from "@/components/consent/ConsentProvider";
+import { AnalyticsGate } from "@/components/analytics/AnalyticsGate";
+import { siteConfig } from "@/lib/site-config";
 
-// Modern ve Okunaklı Metin Fontu
 const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-manrope",
   weight: ["400", "500", "600", "700"],
 });
 
-// Otoriter Başlık Fontu
 const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
@@ -23,13 +22,12 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
+  metadataBase: new URL(siteConfig.siteUrl),
   title: {
     default: "BGC Sigorta | Hayatın Her Anında Güvendesiniz",
     template: "%s | BGC Sigorta",
   },
-  description:
-    "En uygun kasko, trafik ve sağlık sigortası teklifleri. 20+ sigorta şirketini karşılaştırın, en iyi fiyatı bulun. Konya merkezli güvenilir sigorta danışmanlığı.",
+  description: siteConfig.description,
   keywords: [
     "sigorta",
     "kasko",
@@ -52,25 +50,23 @@ export const metadata: Metadata = {
     type: "website",
     locale: "tr_TR",
     url: "/",
-    siteName: "BGC Sigorta",
+    siteName: siteConfig.name,
     title: "BGC Sigorta | Hayatın Her Anında Güvendesiniz",
-    description:
-      "En uygun kasko, trafik ve sağlık sigortası teklifleri. 20+ sigorta şirketini karşılaştırın.",
+    description: siteConfig.description,
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "BGC Sigorta",
+        alt: `${siteConfig.name} Open Graph`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "BGC Sigorta | Hayatın Her Anında Güvendesiniz",
-    description:
-      "En uygun kasko, trafik ve sağlık sigortası teklifleri. 20+ sigorta şirketini karşılaştırın.",
-    images: ["/og-image.jpg"],
+    description: siteConfig.description,
+    images: ["/opengraph-image"],
   },
   robots: {
     index: true,
@@ -83,10 +79,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    // Google Search Console verification code (eklenecek)
-    // google: "verification-code",
-  },
 };
 
 export default function RootLayout({
@@ -96,20 +88,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr">
-      <head>
-        <GoogleAnalytics />
-      </head>
       <body
         className={`${manrope.variable} ${montserrat.variable} font-sans antialiased bg-brand-ice text-brand-blue`}
       >
-        <ErrorBoundary>
-          <ToastProvider>
-            <Navbar />
-            {children}
-            <CookieConsent />
-            <Analytics />
-          </ToastProvider>
-        </ErrorBoundary>
+        <ConsentProvider>
+          <ErrorBoundary>
+            <ToastProvider>
+              <AnalyticsGate />
+              <Navbar />
+              {children}
+              <CookieConsent />
+            </ToastProvider>
+          </ErrorBoundary>
+        </ConsentProvider>
       </body>
     </html>
   );

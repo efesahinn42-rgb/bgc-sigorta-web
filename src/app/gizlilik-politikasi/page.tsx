@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Gizlilik Politikası | BGC Sigorta",
@@ -13,7 +14,7 @@ export default function GizlilikPolitikasiPage() {
           <h1 className="text-4xl font-extrabold text-slate-900 mb-4">
             Gizlilik Politikası
           </h1>
-          <p className="text-slate-600">Son Güncelleme: 23 Ocak 2026</p>
+          <p className="text-slate-600">Son Güncelleme: 19 Mart 2026</p>
         </div>
 
         <div className="prose prose-slate max-w-none space-y-8">
@@ -22,7 +23,7 @@ export default function GizlilikPolitikasiPage() {
               Gizlilik Taahhüdümüz
             </h2>
             <p className="text-slate-700 leading-relaxed">
-              BGC Sigorta Hizmetleri A.Ş. ("BGC Sigorta", "Biz" veya "Şirketimiz") olarak,
+              {siteConfig.legalName} ("BGC Sigorta", "Biz" veya "Şirketimiz") olarak,
               müşterilerimizin gizliliğine ve kişisel verilerinin korunmasına büyük önem
               vermekteyiz. Bu Gizlilik Politikası, web sitemizi ziyaret ettiğinizde veya
               hizmetlerimizi kullandığınızda topladığımız bilgilerin nasıl kullanıldığını ve
@@ -51,7 +52,8 @@ export default function GizlilikPolitikasiPage() {
                 edilen sayfalar
               </li>
               <li>
-                <strong>Çerezler:</strong> Web sitemizin düzgün çalışması için gerekli çerezler
+                <strong>Çerezler:</strong> Zorunlu çerezler ve açık onay vermeniz halinde analitik
+                çerezler
               </li>
             </ul>
           </section>
@@ -66,7 +68,7 @@ export default function GizlilikPolitikasiPage() {
             <ul className="list-disc pl-6 space-y-2 text-slate-700">
               <li>Sigorta teklifleri hazırlama ve sunma</li>
               <li>Müşteri hizmetleri sunma</li>
-              <li>Hasar işlemlerini yürütme</li>
+              <li>Operasyon ekibimize talep bildirimi gönderme</li>
               <li>Yasal yükümlülükleri yerine getirme</li>
               <li>Hizmet kalitesini artırma</li>
               <li>Güvenlik ve dolandırıcılık önleme</li>
@@ -79,8 +81,9 @@ export default function GizlilikPolitikasiPage() {
               Çerezler (Cookies)
             </h2>
             <p className="text-slate-700 leading-relaxed mb-4">
-              Web sitemiz, kullanıcı deneyimini iyileştirmek ve site performansını analiz etmek
-              için çerezler kullanmaktadır. Çerez türleri:
+              Web sitemiz, kullanıcı deneyimini sürdürmek için zorunlu çerezler kullanır. Site
+              kullanımını ölçmeye yönelik analitik araçlar ise yalnızca açık onay verdiğinizde
+              etkinleşir. Çerez türleri:
             </p>
             <ul className="list-disc pl-6 space-y-2 text-slate-700">
               <li>
@@ -88,16 +91,24 @@ export default function GizlilikPolitikasiPage() {
                 gereklidir
               </li>
               <li>
-                <strong>Analitik Çerezler:</strong> Site kullanımını analiz etmek için kullanılır
-              </li>
-              <li>
-                <strong>Fonksiyonel Çerezler:</strong> Kullanıcı tercihlerini hatırlamak için
-                kullanılır
+                <strong>Analitik Çerezler:</strong> Google Analytics ve Vercel Analytics üzerinden,
+                yalnızca onay verdiğiniz takdirde site kullanımını analiz etmek için kullanılır
               </li>
             </ul>
             <p className="text-slate-700 leading-relaxed mt-4">
-              Tarayıcı ayarlarınızdan çerezleri yönetebilir veya devre dışı bırakabilirsiniz.
-              Ancak bu durumda bazı site özellikleri düzgün çalışmayabilir.
+              Çerez tercihinizi banner üzerinden yönetebilirsiniz. Analitik çerezleri reddetmeniz,
+              temel site kullanımınızı etkilemez.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">
+              Veri İşleme ve Saklama Süreci
+            </h2>
+            <p className="text-slate-700 leading-relaxed">
+              Teklif talebi formu üzerinden ilettiğiniz veriler, teklif sürecini yürütmek amacıyla
+              PostgreSQL tabanlı altyapımızda saklanır. Aynı talep, operasyon ekibimizin hızlı
+              değerlendirme yapabilmesi için SMTP üzerinden e-posta bildirimi olarak iletilir.
             </p>
           </section>
 
@@ -173,14 +184,14 @@ export default function GizlilikPolitikasiPage() {
             </p>
             <div className="bg-slate-50 p-4 rounded-lg mt-4">
               <p className="text-sm text-slate-700">
-                <strong>E-posta:</strong> info@bgcsigorta.com
+                <strong>E-posta:</strong> {siteConfig.contact.email}
               </p>
               <p className="text-sm text-slate-700 mt-2">
-                <strong>Telefon:</strong> 0530 232 27 42
+                <strong>Telefon:</strong> {siteConfig.contact.phoneDisplay}
               </p>
               <p className="text-sm text-slate-700 mt-2">
-                <strong>Adres:</strong> Akabe, Şht. Furkan Doğan Cd. Bey Plaza Kat:1 No:3/122,
-                Karatay / Konya
+                <strong>Adres:</strong> {siteConfig.contact.addressLine1}{" "}
+                {siteConfig.contact.addressLine2}, {siteConfig.contact.city}
               </p>
             </div>
           </section>
