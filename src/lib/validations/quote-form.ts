@@ -284,6 +284,14 @@ export function getStepTwoFieldNames(productId: QuoteProductId): Array<keyof Quo
 }
 
 export function buildQuotePayload(values: QuoteWizardFormValues): QuoteSubmissionData {
+  if (!PRODUCT_IDS.includes(values.selectedProduct as QuoteProductId)) {
+    throw new Error("Geçerli bir sigorta ürünü seçiniz.");
+  }
+
+  if (!values.kvkkOnay) {
+    throw new Error("KVKK aydınlatma metnini kabul etmelisiniz.");
+  }
+
   const selectedProduct = values.selectedProduct as QuoteProductId;
 
   const baseContact = {
@@ -291,8 +299,8 @@ export function buildQuotePayload(values: QuoteWizardFormValues): QuoteSubmissio
     soyad: values.soyad.trim(),
     telefon: values.telefon,
     email: values.email.trim() || undefined,
-    kvkkOnay: values.kvkkOnay,
-  };
+    kvkkOnay: true,
+  } satisfies ContactFormData;
 
   switch (getQuoteProductCategory(selectedProduct)) {
     case "vehicle":
