@@ -12,5 +12,6 @@ export async function createLeadAndNotify(submission: QuoteSubmissionData, meta:
   return {
     leadId: `TEMP-${Math.floor(Math.random() * 10000)}`,
     notificationStatus: "sent" as NotificationStatus,
+    notificationError: null as string | null,
   };
 }
