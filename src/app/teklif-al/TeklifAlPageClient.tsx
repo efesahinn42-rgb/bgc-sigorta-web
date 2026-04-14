@@ -290,6 +290,8 @@ export default function TeklifAlPage() {
         </div>
 
         <form onSubmit={onSubmit} className="w-full max-w-2xl">
+          <input type="hidden" {...register("selectedProduct")} />
+
           {step < 4 && (
             <div className="mb-8">
               <div className="flex justify-between text-xs font-bold uppercase text-slate-400 mb-2 tracking-wider">
@@ -435,11 +437,11 @@ export default function TeklifAlPage() {
                     </div>
                     <div>
                       <label className="block text-sm font-bold text-slate-700 mb-2">
-                        ASBİS Referans No (Opsiyonel)
+                        Ruhsat Belge Seri No (Opsiyonel)
                       </label>
                       <input
                         type="text"
-                        placeholder="Varsa referans numaranız"
+                        placeholder="Varsa belge seri numaranız"
                         {...register("asbisReferansNo")}
                         className="w-full p-4 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-red-500 focus:ring-4 focus:ring-red-500/10 transition font-medium"
                       />
@@ -447,8 +449,8 @@ export default function TeklifAlPage() {
                     <div className="bg-blue-50 p-4 rounded-xl border border-blue-100 flex gap-3 items-start">
                       <FileCheck className="text-blue-600 shrink-0 mt-1" size={20} />
                       <p className="text-sm text-blue-700">
-                        Ruhsatınız yanınızda değilse ASBİS referans numarası ile de inceleme
-                        yapabiliriz.
+                        Ruhsatınızdaki belge seri numarasını paylaşarak başvurunuzu daha hızlı
+                        inceleyebiliriz.
                       </p>
                     </div>
                   </>
