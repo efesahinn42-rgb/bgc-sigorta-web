@@ -7,7 +7,7 @@ export function generateStructuredData() {
     name: siteConfig.legalName,
     alternateName: siteConfig.name,
     url: siteConfig.siteUrl,
-    logo: `${siteConfig.siteUrl}/logo.png`,
+    logo: `${siteConfig.siteUrl}/bgc-logo.png`,
     image: `${siteConfig.siteUrl}/opengraph-image`,
     description: siteConfig.description,
     address: {

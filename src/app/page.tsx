@@ -163,7 +163,7 @@ export default function Page() {
             <div className="text-center mb-16">
               <div className="flex justify-center mb-4">
                 <Image
-                  src="/logo.png"
+                  src="/bgc-logo.png"
                   alt={siteConfig.name}
                   width={256}
                   height={256}
@@ -221,7 +221,7 @@ export default function Page() {
               <div className="max-w-3xl">
                 <span className="inline-flex items-center gap-2 py-1 px-3 rounded bg-red-900/50 border border-red-500/30 text-red-400 font-bold tracking-wider uppercase text-xs mb-6">
                   <Image
-                    src="/logo.png"
+                    src="/bgc-logo.png"
                     alt={siteConfig.name}
                     width={256}
                     height={256}
@@ -274,7 +274,7 @@ export default function Page() {
             <div className="text-center mb-16">
               <div className="flex justify-center mb-4">
                 <Image
-                  src="/logo.png"
+                  src="/bgc-logo.png"
                   alt={siteConfig.name}
                   width={256}
                   height={256}
@@ -424,7 +424,7 @@ export default function Page() {
             <div className="mt-20 flex flex-col md:flex-row justify-between items-center border-t border-slate-100 pt-10 text-slate-400 text-xs gap-6">
               <div className="flex items-center gap-4">
                 <Image
-                  src="/logo.png"
+                  src="/bgc-logo.png"
                   alt={siteConfig.name}
                   width={256}
                   height={256}

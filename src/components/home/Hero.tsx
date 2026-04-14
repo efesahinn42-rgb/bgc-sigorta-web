@@ -88,7 +88,7 @@ const Hero = () => {
         >
           <span className="inline-flex items-center gap-2 py-2 px-4 mb-6 rounded-full bg-red-600/20 text-red-400 text-sm font-bold tracking-wider uppercase border border-red-600/30 backdrop-blur-sm">
             <Image
-              src="/logo.png"
+              src="/bgc-logo.png"
               alt="BGC Sigorta"
               width={96}
               height={96}

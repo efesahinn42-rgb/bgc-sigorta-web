@@ -37,7 +37,7 @@ const Partners = () => {
         <div className="text-center mb-12">
           <div className="flex justify-center mb-4">
             <Image
-              src="/logo.png"
+              src="/bgc-logo.png"
               alt="BGC Sigorta"
               width={256}
               height={256}

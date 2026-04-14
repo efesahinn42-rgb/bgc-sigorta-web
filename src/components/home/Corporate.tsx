@@ -42,7 +42,7 @@ const Corporate = () => {
             <span className="inline-flex items-center gap-2 py-1 px-3 rounded bg-red-50 text-red-600 font-bold tracking-wider uppercase text-sm mb-4">
               NEDEN
               <Image
-                src="/logo.png"
+                src="/bgc-logo.png"
                 alt="BGC Sigorta"
                 width={192}
                 height={192}

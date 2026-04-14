@@ -57,7 +57,7 @@ const Navbar = () => {
       >
         <div className="w-44 h-44 relative flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-2xl shadow-black/20">
           <Image
-            src="/logo.png"
+            src="/bgc-logo.png"
             alt="BGC Sigorta Logo"
             width={176}
             height={176}
