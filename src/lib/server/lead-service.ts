@@ -12,7 +12,7 @@ export async function createLeadAndNotify(submission: QuoteSubmissionData, meta:
   const lead = await prisma.lead.create({
     data: {
       selectedProduct: submission.selectedProduct,
-      payload: submission.formData,
+      payload: JSON.parse(JSON.stringify(submission.formData)),
       ad: submission.contact.ad,
       soyad: submission.contact.soyad,
       telefon: submission.contact.telefon,
