@@ -12,9 +12,9 @@ export const siteConfig = {
     "En uygun kasko, trafik ve sağlık sigortası teklifleri. 20+ sigorta şirketini karşılaştırın, en iyi fiyatı bulun. Konya merkezli güvenilir sigorta danışmanlığı.",
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   contact: {
-    phoneDisplay: "0530 232 27 42",
-    phoneHref: "tel:+905302322742",
-    email: "info@bgcsigorta.com",
+    phoneDisplay: "0850 888 0 155",
+    phoneHref: "tel:+908508880155",
+    email: "info@bgcsigorta.com.tr",
     addressLine1: "Akabe, Şht. Furkan Doğan Cd.",
     addressLine2: "Bey Plaza Kat:1 No:3/122",
     city: "Karatay / Konya",
