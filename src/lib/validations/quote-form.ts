@@ -302,7 +302,7 @@ export function buildQuotePayload(values: QuoteWizardFormValues): QuoteSubmissio
     ad: values.ad.trim(),
     soyad: values.soyad.trim(),
     telefon: values.telefon,
-    email: values.email.trim() || undefined,
+    email: values.email?.trim() || undefined,
     kvkkOnay: true,
   } satisfies ContactFormData;
 
@@ -318,7 +318,7 @@ export function buildQuotePayload(values: QuoteWizardFormValues): QuoteSubmissio
             ilKodu: values.plakaIlKodu,
             devam: values.plakaDevami.trim().toUpperCase(),
           },
-          asbisReferansNo: values.asbisReferansNo.trim() || undefined,
+          asbisReferansNo: values.asbisReferansNo?.trim() || undefined,
         },
         contact: baseContact,
       };
