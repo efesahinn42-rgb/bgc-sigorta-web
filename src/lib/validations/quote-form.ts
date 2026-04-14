@@ -261,6 +261,10 @@ export function getStepSchema(step: number, selectedProduct?: string) {
     return getStepTwoSchema(selectedProduct as QuoteProductId);
   }
 
+  if (step >= 3 && selectedProduct && PRODUCT_IDS.includes(selectedProduct as QuoteProductId)) {
+    return getStepTwoSchema(selectedProduct as QuoteProductId).merge(contactSchema);
+  }
+
   return contactSchema;
 }
 
