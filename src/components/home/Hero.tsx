@@ -86,15 +86,15 @@ const Hero = () => {
           key={current}
           className="text-center lg:text-left max-w-4xl animate-fade-up"
         >
-          <span className="inline-flex items-center gap-3 py-2 px-5 mb-6 rounded-full bg-red-600/20 text-white text-sm font-bold tracking-widest uppercase border border-red-600/30 backdrop-blur-sm shadow-xl">
+          <span className="inline-flex items-center gap-4 py-3 px-6 mb-8 rounded-full bg-red-600/20 text-white text-base font-bold tracking-widest uppercase border border-red-600/30 backdrop-blur-sm shadow-xl">
             <Image
               src="/bgc-logo.png"
               alt="BGC Sigorta"
-              width={90}
-              height={28}
-              className="h-6 w-auto object-contain"
+              width={160}
+              height={48}
+              className="h-8 md:h-10 w-auto object-contain"
             />
-            <span className="mt-0.5">Güvencesiyle</span>
+            <span className="mt-1">Güvencesiyle</span>
           </span>
 
           <h1 className="text-4xl md:text-6xl lg:text-8xl font-extrabold text-white mb-8 leading-tight drop-shadow-2xl">
