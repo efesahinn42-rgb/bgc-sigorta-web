@@ -219,15 +219,15 @@ export default function Page() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
               <div className="max-w-3xl">
-                <span className="inline-flex items-center gap-4 py-3 px-6 rounded-2xl bg-red-900/40 border border-red-500/30 text-white font-bold tracking-widest uppercase text-lg mb-8 backdrop-blur-md shadow-2xl">
+                <span className="inline-flex items-center gap-5 py-4 px-8 rounded-full bg-red-900/40 border border-red-500/30 text-white font-bold tracking-widest uppercase text-xl mb-8 backdrop-blur-md shadow-2xl">
                   <Image
                     src="/bgc-logo.png"
                     alt={siteConfig.name}
-                    width={180}
+                    width={200}
                     height={60}
-                    className="h-8 md:h-12 w-auto object-contain"
+                    className="w-44 h-auto object-contain"
                   />
-                  <span className="mt-1 text-red-100">Sigortada Akıllı Dönem</span>
+                  <span className="text-red-100">Sigortada Akıllı Dönem</span>
                 </span>
                 <h2 className="text-4xl lg:text-5xl font-extrabold text-white mb-6 leading-tight">
                   Vaktiniz Değerli, <br />

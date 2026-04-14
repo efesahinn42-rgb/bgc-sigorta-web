@@ -39,18 +39,16 @@ const Corporate = () => {
         <div className="flex flex-col lg:flex-row items-center gap-16">
           {/* SOL TARAF: METİN VE ÖZELLİKLER */}
           <div className="w-full lg:w-1/2">
-            <span className="inline-flex items-center gap-4 py-3 px-8 rounded-3xl bg-slate-50 text-slate-700 font-extrabold tracking-widest uppercase text-2xl lg:text-3xl mb-8 border border-slate-200 shadow-sm">
-              <span className="mt-1">NEDEN</span>
-              <span className="bg-slate-900 px-6 py-3 rounded-2xl shadow-inner flex items-center justify-center">
-                <Image
-                  src="/bgc-logo.png"
-                  alt="BGC Sigorta"
-                  width={200}
-                  height={80}
-                  className="h-10 lg:h-14 w-auto object-contain"
-                />
-              </span>
-              <span className="text-red-600 text-4xl lg:text-5xl mt-0.5">?</span>
+            <span className="inline-flex items-center gap-5 py-4 px-10 rounded-full bg-slate-900 text-white font-extrabold tracking-widest uppercase text-2xl lg:text-3xl mb-8 shadow-2xl">
+              <span>NEDEN</span>
+              <Image
+                src="/bgc-logo.png"
+                alt="BGC Sigorta"
+                width={220}
+                height={70}
+                className="w-48 h-auto object-contain"
+              />
+              <span className="text-red-500 text-4xl lg:text-5xl">?</span>
             </span>
             <h2 className="text-4xl lg:text-5xl font-extrabold text-slate-900 mb-6 leading-tight">
               Geleceğinizi <br />
