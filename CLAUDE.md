@@ -26,8 +26,15 @@ kullanıcı bu proje için DB kurulmayacağını belirtti. Tek kalıcılık kana
 gönderimi başarısız olursa **502 döndürüyor** (sahte "başarılı" göstermiyor) —
 çünkü e-posta başarısızsa talep hiçbir yerde kaydolmuyor. SMTP env değişkenleri
 (`SMTP_HOST/PORT/USER/PASSWORD/FROM`, `LEAD_NOTIFICATION_TO`) Vercel'de mutlaka
-tanımlı olmalı, yoksa **form tamamen çalışmaz**. `vercel env ls production` ile
-kontrol edin — bu oturumda hiçbiri tanımlı değildi.
+tanımlı olmalı, yoksa **form tamamen çalışmaz** (502 döner). `vercel env ls production`
+ile kontrol edin — 2026-09-11 itibariyle hiçbiri tanımlı değil, henüz kurulmadı.
+
+**Alıcı adres:** `info@bgcsigorta.com.tr` (dikkat: `.com` değil `.com.tr`) —
+METUnic panelinden bir **yönlendirme** (forwarding) olarak kurulmuş, gerçek bir
+SMTP-gönderim yapabilen kutu olmayabilir. SMTP kurulurken muhtemelen ayrı bir
+gönderim servisi gerekecek (Resend, Gmail App Password, hosting'in kendi SMTP'si
+vb.) — sadece bu adresi `LEAD_NOTIFICATION_TO` yapmak yeterli olmayabilir, `SMTP_*`
+değişkenleri için gönderebilen ayrı bir hesap/servis lazım.
 
 ## 2026-09-11 düzeltmeleri
 - **KRİTİK — Lead servisi hiç çalışmıyordu:** `src/lib/server/lead-service.ts` sadece
