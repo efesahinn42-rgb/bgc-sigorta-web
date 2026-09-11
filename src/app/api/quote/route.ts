@@ -35,11 +35,24 @@ export async function POST(request: NextRequest) {
       userAgent: request.headers.get("user-agent"),
     });
 
+    // Bu projede veritabanı yok — e-posta bildirimi TEK kalıcılık kanalı.
+    // Gönderim başarısız olursa talep hiçbir yerde kaydolmuyor demektir,
+    // bu yüzden kullanıcıya sahte "başarılı" mesajı göstermiyoruz.
     if (result.notificationStatus === "failed") {
       console.error("Lead notification failed:", {
         leadId: result.leadId,
         error: result.notificationError,
       });
+
+      return NextResponse.json(
+        {
+          success: false,
+          error:
+            "Talebiniz gönderilirken bir sorun oluştu. Lütfen bizi doğrudan arayın veya birazdan tekrar deneyin.",
+          leadId: result.leadId,
+        },
+        { status: 502 }
+      );
     }
 
     return NextResponse.json(

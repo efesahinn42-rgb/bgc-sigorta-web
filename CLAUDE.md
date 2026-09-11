@@ -19,13 +19,22 @@ kırıyor (resmi çözüm yok, Eylül 2026). Ağustos 2026'nın kritik AVIF/Wind
 kalmak güvenli. `sharp` yine de latest'e sabit (libheif katmanı için defense-in-depth).
 `npm audit` "next: critical" gösterecek — bilinçli, göz ardı edilmiyor.
 
+## Veritabanı YOK (bilinçli karar, 2026-09-11)
+`prisma/schema.prisma` ve `@prisma/client` repoda duruyor ama **kullanılmıyor** —
+kullanıcı bu proje için DB kurulmayacağını belirtti. Tek kalıcılık kanalı
+`sendLeadNotificationEmail` (nodemailer/SMTP). Bu yüzden `/api/quote` artık e-posta
+gönderimi başarısız olursa **502 döndürüyor** (sahte "başarılı" göstermiyor) —
+çünkü e-posta başarısızsa talep hiçbir yerde kaydolmuyor. SMTP env değişkenleri
+(`SMTP_HOST/PORT/USER/PASSWORD/FROM`, `LEAD_NOTIFICATION_TO`) Vercel'de mutlaka
+tanımlı olmalı, yoksa **form tamamen çalışmaz**. `vercel env ls production` ile
+kontrol edin — bu oturumda hiçbiri tanımlı değildi.
+
 ## 2026-09-11 düzeltmeleri
 - **KRİTİK — Lead servisi hiç çalışmıyordu:** `src/lib/server/lead-service.ts` sadece
-  rastgele bir `TEMP-xxxx` id döndürüp duruyordu — Prisma'ya hiç yazmıyor, e-posta hiç
+  rastgele bir `TEMP-xxxx` id döndürüp duruyordu — hiçbir yere yazmıyor, e-posta hiç
   göndermiyordu. Yani **teklif formu aylardır hiçbir talebi kaydetmiyordu**, müşteriye
-  "başarılı" mesajı gösterip arkada hiçbir şey yapmıyordu. Gerçek `prisma.lead.create()`
-  + `sendLeadNotificationEmail()` çağrısıyla tamamlandı. E-posta gönderimi başarısız
-  olsa bile (SMTP env eksikse) lead veritabanında kalır — hiçbir talep sessizce kaybolmaz.
+  "başarılı" mesajı gösterip arkada hiçbir şey yapmıyordu. Gerçek
+  `sendLeadNotificationEmail()` çağrısıyla tamamlandı (DB yok, yukarı bakın).
 - `next` 16.1.1 → 16.2.12, `sharp`/`nodemailer`/`js-yaml` güncellendi (kritik CVE + diğer).
 - `@testing-library/dom` eksikti (package.json'da declare edilmemiş peer dependency),
   testler hiç çalışmıyordu (`Cannot find module`). Eklendi, artık 21/23 test geçiyor.

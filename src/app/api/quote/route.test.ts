@@ -123,7 +123,7 @@ describe("POST /api/quote", () => {
     expect(body.error).toMatch(/Bir hata oluştu/i);
   });
 
-  it("returns 200 and marks notification failure without losing the lead", async () => {
+  it("returns 502 when the notification email fails (no DB fallback exists)", async () => {
     vi.mocked(createLeadAndNotify).mockResolvedValue({
       leadId: "lead_2",
       notificationStatus: "failed",
@@ -141,8 +141,7 @@ describe("POST /api/quote", () => {
     const response = await POST(request);
     const body = await response.json();
 
-    expect(response.status).toBe(200);
-    expect(body.success).toBe(true);
-    expect(body.notificationStatus).toBe("failed");
+    expect(response.status).toBe(502);
+    expect(body.success).toBe(false);
   });
 });
